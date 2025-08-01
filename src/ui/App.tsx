@@ -1,29 +1,46 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import {useEffect} from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [username, setUsername] = useState('');
+  const [summonerInfo, setSummonerInfo] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleClick(){
+  if(!username) return;
+
+  try {
+    const result = await window.electron.getSummonerData(username);
+    setSummonerInfo(result);
+    setError(null); 
+  } catch (err) {
+    console.log('failed to retrieve data', err);
+    setError('Failed to retrieve summoner data'); 
+    setSummonerInfo(null);
+  }
+}
 
   return (
     <>
-      <div>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <input
+        placeholder="Enter your summoner"
+        value={username}
+        onChange={e => setUsername(e.target.value)}
+      />
+      <button onClick={handleClick}>Get Summoner Data</button>
+
+      {error && <div style={{ color: 'red' }}>{error}</div>}
+
+      {summonerInfo && (
+        <div>
+          <h3>Profile Data</h3>
+          <pre>{JSON.stringify(summonerInfo.profileData, null, 2)}</pre>
+
+          <h3>Ranked Data</h3>
+          <pre>{JSON.stringify(summonerInfo.rankedData, null, 2)}</pre>
+        </div>
+      )}
     </>
   )
 }
