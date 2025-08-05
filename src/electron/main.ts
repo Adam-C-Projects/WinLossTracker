@@ -2,7 +2,7 @@ import {app, BrowserWindow, ipcMain} from 'electron';
 import path from 'path';
 import {isDev} from './util.js';
 import {getPreloadPath} from './pathResolver.js';
-import { getSummonerData, getProfileData,getRankedData } from './summonerData.js';
+import { getSummonerData} from './summonerData.js';
 
 app.on('ready', () => {
     const mainWindow = new BrowserWindow({

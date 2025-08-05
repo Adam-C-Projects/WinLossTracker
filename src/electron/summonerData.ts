@@ -19,8 +19,8 @@ export async function getSummonerData(user: string) {
         const puuid = await getPuuid(username, tag);
 
         const apis: getUserData[] = [
-            new getProfileData(),
-            new getRankedData()
+            getProfileData,
+            getRankedData
         ];
 
         const res: Record<string, any> = {};
@@ -43,8 +43,8 @@ async function getPuuid(username: string, tag :string){
     return data.puuid;
 }
 
-export class getProfileData implements getUserData {
-    key = 'profileData';
+const getProfileData : getUserData = {
+    key : 'profileData',
 
     async fetch(puuid: string): Promise<any> {
         const res = await fetch(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${puuid}?api_key=${process.env.API_KEY}`);
@@ -53,8 +53,8 @@ export class getProfileData implements getUserData {
     }
 }
 
-export class getRankedData implements getUserData {
-    key = 'rankedData';
+const getRankedData : getUserData = {
+    key : 'rankedData',
 
     async fetch(puuid: string): Promise<any> {
         const res = await fetch(`https://euw1.api.riotgames.com/lol/league/v4/entries/by-puuid/${puuid}?api_key=${process.env.API_KEY}`);
