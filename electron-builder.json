@@ -2,6 +2,12 @@
     "appId": "com.adam-c.winlosstracker",
     "files": ["dist-electron", "dist-react"],
     "extraResources": ["dist-electron/preload.cjs"],
+    "extraFiles":[
+        {
+            "from": ".env",
+            "to": ".env"
+        }
+    ],
     "icon": "./icon.png",
     "mac": {
         "target": "dmg"

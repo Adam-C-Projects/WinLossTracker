@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "main": "dist-electron/main.js",
+  "author": "Adam Colcombe",
   "scripts": {
     "dev": "npm-run-all --parallel dev:react dev:electron",
     "dev:react": "vite",
@@ -17,6 +18,7 @@
     "dist:linux": "npm run transpile:electron && npm run build && electron-builder --linux --x64"
   },
   "dependencies": {
+    "dotenv": "^17.2.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

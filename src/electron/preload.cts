@@ -1,5 +1,5 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electron', {
-  getSummonerData: (username : string) => ipcRenderer.invoke('getSummonerData', username),
+  getSummonerData: (username : string, region : string) => ipcRenderer.invoke('getSummonerData', username, region),
 });

@@ -2,7 +2,9 @@ import {app, BrowserWindow, ipcMain} from 'electron';
 import path from 'path';
 import {isDev} from './util.js';
 import {getPreloadPath} from './pathResolver.js';
-import { getSummonerData} from './summonerData.js';
+import {getSummonerData} from './summonerData.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 app.on('ready', () => {
     const mainWindow = new BrowserWindow({
@@ -11,9 +13,9 @@ app.on('ready', () => {
         }
     });
 
-    ipcMain.handle('getSummonerData', async (event, username: string) => {
+    ipcMain.handle('getSummonerData', async (event, username: string, region: string) => {
         try {
-            return await getSummonerData(username);
+            return await getSummonerData(username, region);
         } 
         catch (err: unknown) {
             if (err instanceof Error) {

@@ -4,6 +4,7 @@ import './App.css'
 
 function App() {
   const [username, setUsername] = useState('');
+  const [region, setRegion] = useState('');
   const [summonerInfo, setSummonerInfo] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -11,7 +12,7 @@ function App() {
   if(!username) return;
 
   try {
-    const result = await window.electron.getSummonerData(username);
+    const result = await window.electron.getSummonerData(username, region);
     setSummonerInfo(result);
     setError(null); 
   } catch (err) {
@@ -28,8 +29,19 @@ function App() {
         value={username}
         onChange={e => setUsername(e.target.value)}
       />
-      <button onClick={handleClick}>Get Summoner Data</button>
+      <select
+        id="region"
+        name="region"
+        value={region}
+        onChange={e => setRegion(e.target.value)}
+      >
+        <option value="">Select region</option>
+        <option value="euw">EUW</option>
+        <option value="na">NA</option>
+      </select>
 
+      <button onClick={handleClick}>Get Summoner Data</button>
+      
       {error && <div style={{ color: 'red' }}>{error}</div>}
 
       {summonerInfo && (

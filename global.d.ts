@@ -3,7 +3,7 @@ export {};
 declare global {
   interface Window {
     electron: {
-      getSummonerData: (username: string) => Promise<any>;
+      getSummonerData: (username: string, region: string) => Promise<any>;
     };
   }
 }
