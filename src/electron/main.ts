@@ -5,7 +5,7 @@ import {getPreloadPath} from './pathResolver.js';
 import {getSummonerData} from './summonerData.js';
 import dotenv from 'dotenv';
 dotenv.config();
-//test
+//test2
 app.on('ready', () => {
     const mainWindow = new BrowserWindow({
         webPreferences: {
