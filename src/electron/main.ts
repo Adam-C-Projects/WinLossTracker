@@ -5,7 +5,6 @@ import {getPreloadPath} from './pathResolver.js';
 import {getSummonerData} from './summonerData.js';
 import dotenv from 'dotenv';
 dotenv.config();
-//test2
 app.on('ready', () => {
     const mainWindow = new BrowserWindow({
         webPreferences: {
@@ -19,10 +18,11 @@ app.on('ready', () => {
         } 
         catch (err: unknown) {
             if (err instanceof Error) {
-                return { error: err.message };
+                throw err;
             } 
             else {
-                return { error: String(err) };
+                
+                throw new Error(String(err));
             }
         }
     });

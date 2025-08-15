@@ -51,7 +51,6 @@ export async function getSummonerData(user: string, region: string) {
 }
 
 const getPuuid = async (username: string, tag :string, region:string): Promise<string> => {
-    console.log(regions[region]);
     const res = await fetch(`https://${regions[region].regional}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${username}/${tag}?api_key=${process.env.API_KEY}`);
     if(!res.ok) throw new Error('failed to fetch profile data');
     
